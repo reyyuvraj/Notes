@@ -7,12 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.notes.data.User
 import com.example.notes.data.UserDatabase
 import com.example.notes.repository.UserRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<User>>
+    val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
     init {
@@ -21,9 +22,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         readAllData = repository.readAllData
     }
 
-    suspend fun addUser(user: User){
-        coroutineScope {
-            repository.addUser(user= user)
+    fun addUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addUser(user = user)
         }
     }
 }
