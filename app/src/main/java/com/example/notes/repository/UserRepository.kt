@@ -1,8 +1,8 @@
 package com.example.notes.repository
 
 import androidx.lifecycle.LiveData
-import com.example.notes.data.User
 import com.example.notes.data.UserDao
+import com.example.notes.model.User
 
 class UserRepository(private val userDao: UserDao) {
 
@@ -12,6 +12,7 @@ class UserRepository(private val userDao: UserDao) {
         userDao.addUser(user)
     }
 
-
-
+    suspend fun updateUser(user: User) {
+        userDao.updateUser(user)
+    }
 }

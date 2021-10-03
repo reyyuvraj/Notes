@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.notes.R
-import com.example.notes.data.User
+import com.example.notes.model.User
 import com.example.notes.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
@@ -54,6 +54,6 @@ class AddFragment : Fragment() {
     }
 
     private fun inputCheck(firsName: String, lastName: String, age: Editable): Boolean {
-        return !(TextUtils.isEmpty(firsName) && TextUtils.isEmpty(lastName) && TextUtils.isEmpty(age))
+        return !(TextUtils.isEmpty(firsName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(age))
     }
 }

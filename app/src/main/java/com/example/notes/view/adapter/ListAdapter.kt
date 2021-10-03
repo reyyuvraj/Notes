@@ -3,10 +3,11 @@ package com.example.notes.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
-import com.example.notes.data.User
-import kotlinx.android.synthetic.main.fragment_add.view.*
+import com.example.notes.model.User
+import com.example.notes.view.fragment.ListFragmentDirections
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -31,6 +32,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
         holder.itemView.forLastName.text = currentItem.lastName
         holder.itemView.forAge.text = currentItem.age.toString()
 
+        holder.itemView.listItem.setOnClickListener {
+            val action  = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
